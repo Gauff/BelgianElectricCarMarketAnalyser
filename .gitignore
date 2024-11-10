@@ -1,0 +1,23 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+.vscode/
+.idea/
+
+# Project specific
+results/
+visualizations/
+logs/
+*.pkl
+*.json
+
+# Chrome driver
+.wdm/
+
+.venv/
+build/
