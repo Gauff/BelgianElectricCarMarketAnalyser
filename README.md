@@ -1,13 +1,15 @@
-# Electric Car Market Analyzer
+# Second hand electric car belgian market analyzer
 
-A Python application for analyzing the electric car market by scraping and visualizing data from various car listing websites.
+A Python application for analyzing the second hand electric car belgian market by scraping and visualizing data from various car listing websites.
 
 ## Features
 - Scrapes electric car listings from multiple sources (Autoscout24, 2ememain, Gocar)
 - Cleans and normalizes data
 - Provides interactive visualizations
-- Detects price changes
 - Real-time data updates
+
+
+![Screenshot](https://github.com/Gauff/BelgianElectricCarMarketAnalyser/blob/main/screenshots/2.png)
 
 ## Setup
 1. Clone the repository
