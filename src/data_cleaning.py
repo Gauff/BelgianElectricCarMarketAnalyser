@@ -1,4 +1,8 @@
 import src.data.electric_car_models
+from src.logging_config import setup_logging
+
+# Set up logging
+logger = setup_logging(__name__)
 
 
 forbidden_list = [
@@ -104,7 +108,7 @@ def clean_car_list(cars):
         make, model = src.data.electric_car_models.find_make_and_model(description)
 
         if make is None or model is None:
-            print(f"Could not find make and model for {description}")
+            logger.debug(f"Could not find make and model for {description}")
             continue
 
         car.brand_name = make

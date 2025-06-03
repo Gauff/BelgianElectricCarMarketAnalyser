@@ -1,6 +1,11 @@
 import re
 from collections import OrderedDict, defaultdict
 
+from src.logging_config import setup_logging
+
+# Set up logging
+logger = setup_logging(__name__)
+
 
 # Input list of makes and models
 models = [
@@ -219,10 +224,10 @@ def find_make_and_model(text):
                 if cleaned_model_name in cleaned_text:
                     return make, model_name
             return make, None
-    print(f"Make not found for {text}")
+    logger.debug(f"Make not found for {text}")
     return None, None
 
 
 if __name__ == "__main__":
     ma, mod = find_make_and_model("skoda fabia")
-    print(f"{ma} | {mod}")
+    logger.info(f"{ma} | {mod}")

@@ -2,6 +2,11 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 
+from src.logging_config import setup_logging
+
+# Set up logging
+logger = setup_logging(__name__)
+
 
 def generate_color_scale(size, cmap_name="viridis"):
     """
@@ -30,4 +35,4 @@ def generate_log_marks(min_val, max_val):
 if __name__ == "__main__":
 
     Viridis = generate_color_scale(10)
-    print("Viridis =", Viridis)
+    logger.info(f"Viridis = {Viridis}")

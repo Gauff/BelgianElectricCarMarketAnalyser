@@ -3,6 +3,11 @@ import os.path
 import pickle
 from datetime import datetime
 
+from src.logging_config import setup_logging
+
+# Set up logging
+logger = setup_logging(__name__)
+
 
 def save_json(
     content,
@@ -51,7 +56,7 @@ def load_json(file_path):
             try:
                 json_data = json.loads(json_data)
             except json.JSONDecodeError:
-                print(f"Failed to parse JSON string: {json_data}")
+                logger.error(f"Failed to parse JSON string: {json_data}")
         return json_data
 
 

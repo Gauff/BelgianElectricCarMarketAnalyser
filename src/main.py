@@ -12,6 +12,10 @@ from src.data_preparation import (
     prepare_dataset_for_display,
     save_dataframe,
 )
+from src.logging_config import setup_logging
+
+# Set up logging
+logger = setup_logging(__name__)
 
 
 def generate_graph(df_cars):
@@ -218,8 +222,8 @@ def scrap_adds_and_run_server():
 
 if __name__ == "__main__":
     try:
-        scrap_adds_and_run_server()
+        # scrap_adds_and_run_server()
         # scrap_ads()
-        # run_server()
+        run_server()
     except Exception as e:
-        print(f"An error occurred: {e!s}")
+        logger.error(f"An error occurred: {e!s}", exc_info=True)
