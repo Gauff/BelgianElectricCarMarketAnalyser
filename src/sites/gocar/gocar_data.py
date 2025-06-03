@@ -92,3 +92,6 @@ class Formatted:
     point_of_sale_pro_first: int = None
     point_of_sale_pro_first_valid: int = None
     fuel_type_category: str = None
+    is_leasing: bool = None
+    model_slug: str = None
+    model_all_names: str = None

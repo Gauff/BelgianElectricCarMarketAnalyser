@@ -14,14 +14,20 @@ bearer_token = os.getenv('GOCAR_BEARER_TOKEN')
 if not bearer_token:
     raise ValueError("GOCAR_BEARER_TOKEN not found in environment variables. Please add it to your .env file.")
 
+# Get the project root directory (3 levels up from this file)
+# This file is in: src/sites/gocar/gocar.py
+# Project root is: ../../../
+script_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(script_dir)))
+
 # Get cars from :
 # - web site
 # - last cached file
 
-result_file_path = os.path.join('results', 'gocar')
+result_file_path = os.path.join(project_root, 'results', 'gocar')
 file_name = 'gocar'
-query_url = "https://search.gocar.be/multi-search"
-request_json_file_path = os.path.join('src', 'sites', 'gocar', 'gocar_electric_car_search.json')
+query_url = "https://search.gocar.be/multi-search"#"https://search.gocar.be/multi-search"
+request_json_file_path = os.path.join(script_dir, 'gocar_electric_car_search.json')
 
 def get_cars_from_web_site():
     print(f"Gocar")
@@ -50,7 +56,7 @@ def _get_search_settings():
         query_url,
         bearer_token)
     settings.add_header("Content-Type", "application/json")
-    settings.add_header("User-Agent", "MyApp/1.0")
+    settings.add_header("User-Agent", "MyApp/1.1")
     # Read JSON from file and update the body
     settings.set_body_from_json_file(request_json_file_path)
     return settings
@@ -61,7 +67,7 @@ def _get_search_settings():
         query_url,
         "5e8d520f3d3918d16f9a79b1b964977612c1b7f738d4530a078cfd8bcdc485bd")
     settings.add_header("Content-Type", "application/json")
-    settings.add_header("User-Agent", "MyApp/1.0")
+    settings.add_header("User-Agent", "MyApp/1.1")
     # Read JSON from file and update the body
     settings.set_body_from_json_file(request_json_file_path)
 

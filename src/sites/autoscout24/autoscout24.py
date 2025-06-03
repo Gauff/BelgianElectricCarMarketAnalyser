@@ -298,7 +298,10 @@ def _get_car_list_from_json_file(json_file_path):
     try:
         json_data = file_management.load_json(json_file_path)
         cars = []
-        for result in json.loads(json_data):
+
+        # json_data is already parsed by file_management.load_json()
+        # No need to call json.loads() again
+        for result in json_data:
             car = ElectricCar.from_json(json.dumps(result))
             cars.append(car)
         logger.info(f"Loaded {len(cars)} cars from file")

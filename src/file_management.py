@@ -14,6 +14,11 @@ def save_json(
 
     file_path = generate_file_path(file_path, file_name, file_extension, add_date_prefix, date_prefix_format)
 
+    # Ensure the directory exists
+    directory = os.path.dirname(file_path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory, exist_ok=True)
+
     with open(file_path, 'w', encoding='utf-8') as json_file:
         json.dump(content, json_file, ensure_ascii=False, indent=4)
 
@@ -32,6 +37,12 @@ def generate_file_path(file_path, file_name, extension, add_date_prefix=True, da
 def load_json(file_path):
     with open(file_path, 'r', encoding='utf-8') as json_file:
         json_data = json.load(json_file)
+        # Si c'est une chaîne, essayer de la parser à nouveau
+        if isinstance(json_data, str):
+            try:
+                json_data = json.loads(json_data)
+            except json.JSONDecodeError:
+                pass
         return json_data
 
 
@@ -44,6 +55,11 @@ def save_pickle(
         date_prefix_format='%Y%m%d%H%M%S'):
 
     file_path = generate_file_path(file_path, file_name, file_extension, add_date_prefix, date_prefix_format)
+
+    # Ensure the directory exists
+    directory = os.path.dirname(file_path)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory, exist_ok=True)
 
     with open(file_path, 'wb') as f:
         pickle.dump(content, f)
@@ -77,6 +93,11 @@ def get_two_lasts_generated_file_path(file_path, file_name, file_extension, add_
 
 def _list_generated_file_paths(file_path, file_name, file_extension, add_date_prefix=True, date_prefix_format='%Y%m%d%H%M%S'):
     file_paths = []
+
+    # Check if directory exists
+    if not os.path.exists(file_path):
+        return file_paths
+
     for file in os.listdir(file_path):
         if file.endswith(f'{file_name}{file_extension}'):
             file_paths.append(os.path.join(file_path, file))

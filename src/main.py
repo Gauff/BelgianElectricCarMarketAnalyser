@@ -158,7 +158,7 @@ def scrap_adds_and_run_server():
 
 if __name__ == '__main__':
     try:
-        #scrap_ads()
+        scrap_ads()
         run_server()
     except Exception as e:
         print(f"An error occurred: {str(e)}")

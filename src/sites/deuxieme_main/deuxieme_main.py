@@ -133,7 +133,7 @@ def _save_and_return(all_cars):
         return []
 
     try:
-        all_cars_json = json.dumps([car.__dict__ for car in all_cars])
+        all_cars_json = json.dumps(list([car.__dict__ for car in all_cars]))
         json_file_path = file_management.save_json(
             all_cars_json,
             DEUXIEMEMAIN_RESULTS,
@@ -221,7 +221,27 @@ def _get_image_url(data):
 def _get_car_list_from_json_file(json_file_path):
     try:
         json_data = file_management.load_json(json_file_path)
-        return [ElectricCar(**result) for result in json_data]
+
+        # Handle cases where json_data might be a single string or invalid format
+        if not isinstance(json_data, list):
+            logger.error(f"JSON data is not a list: {type(json_data)}")
+            return []
+
+        cars = []
+        for item in json_data:
+            # Skip any non-dictionary items
+            if not isinstance(item, dict):
+                logger.warning(f"Skipping invalid car data: {item}")
+                continue
+
+            try:
+                cars.append(ElectricCar(**item))
+            except TypeError as e:
+                logger.warning(f"Could not create ElectricCar from item {item}: {str(e)}")
+                continue
+
+        return cars
+
     except Exception as e:
         logger.error(f"Error loading cars from JSON file: {str(e)}", exc_info=True)
         return []
