@@ -222,8 +222,8 @@ def scrap_adds_and_run_server():
 
 if __name__ == "__main__":
     try:
-        # scrap_adds_and_run_server()
+        scrap_adds_and_run_server()
         # scrap_ads()
-        run_server()
+        # run_server()
     except Exception as e:
         logger.error(f"An error occurred: {e!s}", exc_info=True)
