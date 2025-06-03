@@ -92,7 +92,7 @@ The Electric Car Market Analyzer is designed to provide comprehensive insights i
 
 ### Required Accounts/API Access
 - **Gocar Bearer Token**: Required for accessing Gocar API
-  - Contact Gocar support or check their developer documentation
+  - Browse to Gocar web site and get it from browser developer tools
   - Token should be added to your `.env` file
 
 ### Network Requirements
@@ -147,8 +147,6 @@ pip install -r src/requirements.txt
 - `pandas>=2.1.0` - Data manipulation and analysis
 - `plotly>=5.18.0` - Interactive plotting
 - `requests>=2.31.0` - HTTP library
-- `seaborn>=0.13.0` - Statistical data visualization
-- `sweetviz>=2.2.1` - Automated EDA
 - `python-dotenv>=1.0.0` - Environment variable management
 
 ### Step 4: Environment Configuration
