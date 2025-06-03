@@ -1,0 +1,27 @@
+# Development dependencies for electric car market analyzer
+# Install with: uv pip install -r requirements-dev.txt
+# Or with pip: pip install -r requirements-dev.txt
+
+# Code formatting
+black>=23.0.0
+
+# Fast linting and formatting
+ruff>=0.1.0
+
+# Static type checking
+mypy>=1.5.0
+
+# Type stubs for better type checking
+types-requests>=2.31.0
+types-beautifulsoup4>=4.12.0
+pandas-stubs>=2.1.0
+
+# Data validation (production dependency but listed here for clarity)
+pydantic>=2.0.0
+
+# Optional: Testing framework (for future use)
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Optional: Pre-commit hooks (for future use)
+pre-commit>=3.0.0

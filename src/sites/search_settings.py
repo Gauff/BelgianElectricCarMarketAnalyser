@@ -46,7 +46,7 @@ class SearchSettings:
         Returns:
             dict: The JSON data read from the file.
         """
-        with open(file_path, 'r') as file:
+        with open(file_path) as file:
             self.update_body(json.load(file))
 
 

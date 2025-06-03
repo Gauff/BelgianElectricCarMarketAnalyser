@@ -1,0 +1,227 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "electric-car-market-analyser"
+version = "1.0.0"
+description = "Electric car market analysis tool with web scraping and interactive dashboard"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    {name = "Laurent", email = "your.email@example.com"},
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "beautifulsoup4>=4.12.0",
+    "botasaurus",
+    "dash>=2.14.0",
+    "matplotlib>=3.8.0",
+    "numpy>=1.24.0",
+    "pandas>=2.1.0",
+    "plotly>=5.18.0",
+    "requests>=2.31.0",
+    "seaborn>=0.13.0",
+    "sweetviz>=2.2.1",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.0.0",
+    "selenium>=4.0.0",
+    "webdriver-manager>=4.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.5.0",
+    "types-requests>=2.31.0",
+    "types-beautifulsoup4>=4.12.0",
+    "pandas-stubs>=2.1.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+# Black configuration
+[tool.black]
+line-length = 88
+target-version = ['py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | __pycache__
+  | logs
+  | results
+  | screenshots
+  | visualizations
+)/
+'''
+
+# Ruff configuration
+[tool.ruff]
+# Same as Black's line length
+line-length = 88
+target-version = "py39"
+
+# Exclude directories
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    "logs",
+    "results",
+    "screenshots",
+    "visualizations",
+]
+
+[tool.ruff.lint]
+# Enable specific rule sets
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "N",   # pep8-naming
+    "S",   # flake8-bandit (security)
+    "T20", # flake8-print
+    "SIM", # flake8-simplify
+    "RUF", # Ruff-specific rules
+]
+
+# Ignore specific rules that might be too strict for this project
+ignore = [
+    "E501",   # Line too long (handled by Black)
+    "S101",   # Use of assert (common in data analysis)
+    "T201",   # Print statements (used for logging/debugging)
+    "B008",   # Do not perform function calls in argument defaults
+    "N806",   # Variable in function should be lowercase (pandas conventions)
+    "S608",   # Possible SQL injection (false positives with pandas)
+    "N815",   # MixedCase variable in class scope (common in data analysis)
+]
+
+# Allow unused variables when underscore-prefixed
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.per-file-ignores]
+# Tests can use more flexible rules
+"test_*.py" = ["S101", "T201"]
+"**/test_*.py" = ["S101", "T201"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+force-single-line = false
+lines-after-imports = 2
+
+# MyPy configuration
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false  # Start lenient, can be made stricter later
+disallow_incomplete_defs = false
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+# Configure for src layout - treat src as the package root
+mypy_path = "src"
+namespace_packages = true
+explicit_package_bases = true
+# Only check files in src directory, not from project root
+files = ["src"]
+
+# Exclude directories that don't need type checking
+exclude = [
+    "build/",
+    "logs/",
+    "results/",
+    "screenshots/",
+    "visualizations/",
+    "__pycache__/",
+]
+
+# Per-module options for external libraries
+[[tool.mypy.overrides]]
+module = [
+    "botasaurus.*",
+    "sweetviz.*",
+    "plotly.*",
+    "dash.*",
+]
+ignore_missing_imports = true
+
+# Coverage configuration (for future use)
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "build/*",
+    "logs/*",
+    "results/*",
+    "screenshots/*",
+    "visualizations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
+[dependency-groups]
+dev = [
+    "pandas-stubs>=2.2.2.240807",
+]

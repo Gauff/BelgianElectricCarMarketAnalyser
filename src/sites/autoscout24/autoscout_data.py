@@ -1,13 +1,12 @@
 from dataclasses import dataclass
-from typing import List
 
 
 @dataclass
 class Listing:
     id: str
     evBanner: dict
-    images: List[str]
-    ocsImagesA: List[str]
+    images: list[str]
+    ocsImagesA: list[str]
     price: dict
     availableNow: bool
     superDeal: dict
@@ -19,10 +18,10 @@ class Listing:
     appliedAdTier: str
     adTier: str
     isOcs: bool
-    specialConditions: List[str]
+    specialConditions: list[str]
     statistics: dict
     searchResultType: str
     tracking: dict
     coverImageAttractiveness: float
-    vehicleDetails: List[dict]
+    vehicleDetails: list[dict]
     isAmmListing: bool

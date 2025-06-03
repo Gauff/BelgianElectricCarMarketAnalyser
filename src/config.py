@@ -1,22 +1,22 @@
 import os
 
+
 # Base paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(BASE_DIR, 'results')
-VISUALIZATIONS_DIR = os.path.join(BASE_DIR, 'visualizations')
+PROJECT_ROOT = os.path.dirname(BASE_DIR)  # Go up one level from src/ to project root
+RESULTS_DIR = os.path.join(PROJECT_ROOT, "results")
 
 # Site-specific paths
-AUTOSCOUT24_RESULTS = os.path.join(RESULTS_DIR, 'autoscout24')
-DEUXIEMEMAIN_RESULTS = os.path.join(RESULTS_DIR, '2ememain')
-GOCAR_RESULTS = os.path.join(RESULTS_DIR, 'gocar')
+AUTOSCOUT24_RESULTS = os.path.join(RESULTS_DIR, "autoscout24")
+DEUXIEMEMAIN_RESULTS = os.path.join(RESULTS_DIR, "2ememain")
+GOCAR_RESULTS = os.path.join(RESULTS_DIR, "gocar")
 
 # Files and directories that need to exist
 REQUIRED_DIRS = [
     RESULTS_DIR,
-    VISUALIZATIONS_DIR,
     AUTOSCOUT24_RESULTS,
     DEUXIEMEMAIN_RESULTS,
-    GOCAR_RESULTS
+    GOCAR_RESULTS,
 ]
 
 # Create required directories if they don't exist

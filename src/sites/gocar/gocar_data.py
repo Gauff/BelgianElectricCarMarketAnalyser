@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 # Define data classes to represent the JSON structure
 @dataclass
 class Price:
@@ -16,10 +17,12 @@ class Price:
     formatted: str = None
     unformatted_reject_null_to_the_end: float = None
 
+
 @dataclass
 class Geo:
     lat: float = None
     lng: float = None
+
 
 @dataclass
 class Formatted:
@@ -95,3 +98,4 @@ class Formatted:
     is_leasing: bool = None
     model_slug: str = None
     model_all_names: str = None
+    built_year_sort_string: str = None

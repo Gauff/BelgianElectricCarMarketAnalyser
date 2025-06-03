@@ -8,7 +8,7 @@ def extract_year(string):
         return None
 
     # Regular expression pattern to match the year
-    pattern = r'\b\d{4}\b'  # Matches a 4-digit number
+    pattern = r"\b\d{4}\b"  # Matches a 4-digit number
 
     # Search for the year in the string
     match = re.search(pattern, string)
@@ -29,15 +29,15 @@ def extract_int(data):
     if data is None:
         return None
 
-        pattern = r'\b\d*\b'
+    pattern = r"\b\d*\b"
 
-        # Search for the year in the string
-        match = re.search(pattern, string)
+    # Search for the year in the string
+    match = re.search(pattern, data)
 
-        if match:
-            # Extract the matched year
-            number = int(match.group())
-            return number
-        else:
-            # If no number found, return None or raise an error, depending on your use case
-            return None
+    if match:
+        # Extract the matched year
+        number = int(match.group())
+        return number
+    else:
+        # If no number found, return None or raise an error, depending on your use case
+        return None
